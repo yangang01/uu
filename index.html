@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>给你的一封抱抱道歉信</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=ZCOOL+KuaiLe&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='50' font-size='44'%3E%F0%9F%92%97%3C/text%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <div id="particle-field" aria-hidden="true"></div>
+      <div class="aurora aurora-a" aria-hidden="true"></div>
+      <div class="aurora aurora-b" aria-hidden="true"></div>
+
+      <header class="topbar">
+        <div class="brand-lockup">
+          <span class="brand-mark">Hello Kitty apology letter</span>
+          <h1>给你的一封发光道歉信</h1>
+          <p class="headline-note">昨天让你失落了，我不想轻轻带过，所以想认真把安慰和在乎都放在这里。</p>
+          <p class="music-inline">BGM · Back To December</p>
+        </div>
+      </header>
+
+      <main class="single-stage">
+        <section class="apology-card glass-card">
+          <div class="copy-column">
+            <span class="scene-badge">认真道歉版</span>
+            <h2>我知道，昨天让你难受了。</h2>
+            <p class="lead">
+              该陪着你的时候，我没有陪你，反而去陪了别人。让你失落、委屈，是我的问题。
+            </p>
+
+            <div id="typewriter-lines" class="typewriter-lines" aria-live="polite"></div>
+
+            <div class="button-row">
+              <button type="button" id="start-story" class="pill primary">点一下，让我好好哄你</button>
+              <button type="button" id="show-message" class="pill ghost">收下我这句心里话</button>
+            </div>
+
+            <div id="final-message" class="final-message">
+              <p>我不想只说对不起，我更想让你以后在我这里，被好好在乎。</p>
+            </div>
+          </div>
+
+          <div class="visual-column">
+            <div class="kitty-showcase">
+              <div class="kitty-aura"></div>
+              <div class="orbit orbit-left"></div>
+              <div class="orbit orbit-right"></div>
+              <div class="kitty-frame">
+                <div class="sprite-stage" aria-label="Hello Kitty 雪碧动画主视觉">
+                  <div class="sprite-glow sprite-glow-a"></div>
+                  <div class="sprite-glow sprite-glow-b"></div>
+                  <div class="kitty-sprite-shadow"></div>
+                  <div class="kitty-sprite kitty-sprite-main"></div>
+                  <div class="kitty-sprite kitty-sprite-mini mini-left"></div>
+                  <div class="kitty-sprite kitty-sprite-mini mini-right"></div>
+                </div>
+                <div class="kitty-sparkles" aria-hidden="true">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+              </div>
+              <div class="sticker sticker-heart"></div>
+              <div class="sticker sticker-bow"></div>
+              <div class="mini-note">
+                <span>不是你太敏感</span>
+                <span>是我昨天没有把你照顾好</span>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
