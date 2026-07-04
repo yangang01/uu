@@ -1,5 +1,6 @@
 .DS_Store
 *.mp3
+!Ed Sheeran - Perfect.mp3
 image.png
 image1.png
 companion-*.png

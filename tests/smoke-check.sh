@@ -39,6 +39,7 @@ grep -q '@keyframes panelFade' "$ROOT/style.css"
 grep -q '.kitty-sparkles' "$ROOT/style.css"
 
 grep -q 'const playlist' "$ROOT/script.js"
+grep -q 'Ed Sheeran - Perfect.mp3' "$ROOT/script.js"
 grep -q 'const tabContent' "$ROOT/script.js"
 grep -q 'function switchTab' "$ROOT/script.js"
 grep -q 'tabPlaceholder.hidden = true' "$ROOT/script.js"

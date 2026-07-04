@@ -876,11 +876,17 @@ button {
     display: grid;
     width: 100%;
     grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 10px;
+    border-radius: 28px;
+    background: rgba(255, 248, 251, 0.94);
   }
 
   .tab-pill {
     width: 100%;
     text-align: center;
+    min-height: 58px;
+    border-radius: 22px;
   }
 
   .tab-panel {
@@ -996,6 +1002,17 @@ button {
 
   .typewriter-lines {
     min-height: 120px;
+  }
+
+  .tab-switcher {
+    padding: 8px;
+    border-radius: 24px;
+  }
+
+  .tab-pill {
+    min-height: 54px;
+    padding: 11px 18px;
+    border-radius: 18px;
   }
 
   .kitty-showcase {

@@ -9,7 +9,7 @@ const tabPanelTitle = document.querySelector("#tab-panel-title");
 const tabPanelBody = document.querySelector("#tab-panel-body");
 const particleField = document.querySelector("#particle-field");
 
-const playlist = [];
+const playlist = ["./Ed Sheeran - Perfect.mp3"];
 
 const typewriterLines = [
   "昨天我本该一直陪着你。",
