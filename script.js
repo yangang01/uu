@@ -7,6 +7,7 @@ const tabPanelContent = document.querySelector("#tab-panel-content");
 const tabPanelKicker = document.querySelector("#tab-panel-kicker");
 const tabPanelTitle = document.querySelector("#tab-panel-title");
 const tabPanelBody = document.querySelector("#tab-panel-body");
+const musicToggle = document.querySelector("#music-toggle");
 const particleField = document.querySelector("#particle-field");
 
 const playlist = ["./Ed Sheeran - Perfect.mp3"];
@@ -45,6 +46,17 @@ let particleTimer = null;
 let typewriterHasPlayed = false;
 let autoplayUnlocked = false;
 
+function syncMusicToggle() {
+  if (!musicToggle || !audio) {
+    return;
+  }
+
+  const isPlaying = !audio.paused;
+  musicToggle.textContent = isPlaying ? "BGM · Playing" : "BGM · Perfect";
+  musicToggle.classList.toggle("is-playing", isPlaying);
+  musicToggle.setAttribute("aria-pressed", isPlaying ? "true" : "false");
+}
+
 function tryAutoplay() {
   if (!audio) {
     autoplayUnlocked = true;
@@ -55,8 +67,34 @@ function tryAutoplay() {
     .play()
     .then(() => {
       autoplayUnlocked = true;
+      syncMusicToggle();
     })
     .catch(() => {});
+}
+
+function tryUnlockAudio() {
+  if (!autoplayUnlocked) {
+    tryAutoplay();
+  }
+}
+
+async function toggleMusic() {
+  if (!audio) {
+    return;
+  }
+
+  if (audio.paused) {
+    try {
+      await audio.play();
+      autoplayUnlocked = true;
+    } catch (_) {
+      return;
+    }
+  } else {
+    audio.pause();
+  }
+
+  syncMusicToggle();
 }
 
 function typeLine(line, delay) {
@@ -176,18 +214,23 @@ if (tabSwitcher) {
   tabSwitcher.addEventListener("click", handleTabInteraction);
 }
 
+if (musicToggle) {
+  musicToggle.addEventListener("click", toggleMusic);
+}
+
 startParticles();
 playTypewriterSequence();
 tryAutoplay();
 
-document.addEventListener(
-  "pointerdown",
-  () => {
-    if (!autoplayUnlocked) {
-      tryAutoplay();
-    }
-  },
-  { once: true }
-);
+["pointerdown", "touchstart", "click", "keydown"].forEach((eventName) => {
+  document.addEventListener(eventName, tryUnlockAudio, { passive: true });
+});
+
+if (audio) {
+  audio.addEventListener("play", syncMusicToggle);
+  audio.addEventListener("pause", syncMusicToggle);
+  audio.addEventListener("ended", syncMusicToggle);
+  syncMusicToggle();
+}
 
 window.addEventListener("beforeunload", pauseParticles);

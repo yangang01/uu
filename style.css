@@ -142,6 +142,18 @@ button {
 
 .music-inline {
   margin-top: 16px;
+  border: 0;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.music-inline:hover {
+  transform: translateY(-1px);
+}
+
+.music-inline.is-playing {
+  background: linear-gradient(135deg, rgba(255, 95, 157, 0.18), rgba(255, 63, 137, 0.24));
+  box-shadow: 0 10px 24px rgba(255, 95, 157, 0.14);
 }
 
 .single-stage {
