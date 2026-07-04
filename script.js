@@ -1,10 +1,15 @@
 const typewriterHost = document.querySelector("#typewriter-lines");
-const finalMessage = document.querySelector("#final-message");
-const startButton = document.querySelector("#start-story");
-const showMessageButton = document.querySelector("#show-message");
+const tabButtons = [...document.querySelectorAll("[data-tab]")];
+const tabSwitcher = document.querySelector(".tab-switcher");
+const tabPanel = document.querySelector("#tab-panel");
+const tabPlaceholder = document.querySelector("#tab-placeholder");
+const tabPanelContent = document.querySelector("#tab-panel-content");
+const tabPanelKicker = document.querySelector("#tab-panel-kicker");
+const tabPanelTitle = document.querySelector("#tab-panel-title");
+const tabPanelBody = document.querySelector("#tab-panel-body");
 const particleField = document.querySelector("#particle-field");
 
-const playlist = ["./Taylor Swift - Back To December.mp3"];
+const playlist = [];
 
 const typewriterLines = [
   "昨天我本该一直陪着你。",
@@ -15,18 +20,37 @@ const typewriterLines = [
 
 const revealMessage =
   "你对我来说不是随便的人，所以你的失落我也不想随便带过。如果你愿意，我会把昨天欠你的陪伴，慢慢补给你。";
+const tabContent = {
+  comfort: {
+    kicker: "抱抱模式",
+    title: "我知道你昨天不是在闹情绪。",
+    body: "你只是因为在意我，才会被这件事弄得失落又委屈。所以我现在更想先抱抱你，而不是只顾着解释。",
+  },
+  serious: {
+    kicker: "认真模式",
+    title: "昨天我本该一直陪着你。",
+    body: "可我没有在你身边，反而去陪了别人。让你失落，是我的问题。我不想找借口，只想以后把你放在更重要的位置上。",
+  },
+};
 
-const audio = new Audio(playlist[0]);
-audio.loop = true;
-audio.preload = "auto";
-audio.autoplay = true;
-audio.volume = 0.65;
+const audio = playlist[0] ? new Audio(playlist[0]) : null;
+if (audio) {
+  audio.loop = true;
+  audio.preload = "auto";
+  audio.autoplay = true;
+  audio.volume = 0.65;
+}
 
 let particleTimer = null;
 let typewriterHasPlayed = false;
 let autoplayUnlocked = false;
 
 function tryAutoplay() {
+  if (!audio) {
+    autoplayUnlocked = true;
+    return;
+  }
+
   audio
     .play()
     .then(() => {
@@ -106,22 +130,51 @@ function pauseParticles() {
   }
 }
 
-function startStory() {
-  playTypewriterSequence();
-  startParticles();
-  tryAutoplay();
-}
+function switchTab(nextTab) {
+  const content = tabContent[nextTab];
+  if (!content || !tabPanel || !tabPlaceholder || !tabPanelContent) {
+    return;
+  }
 
-function showFinalMessage() {
-  finalMessage.innerHTML = `<p>${revealMessage}</p>`;
+  tabButtons.forEach((button) => {
+    const active = button.dataset.tab === nextTab;
+    button.classList.toggle("is-active", active);
+    button.setAttribute("aria-selected", active ? "true" : "false");
+  });
 
-  for (let i = 0; i < 10; i += 1) {
-    window.setTimeout(spawnParticle, i * 60);
+  tabPlaceholder.hidden = true;
+  tabPanelContent.hidden = false;
+  tabPanelKicker.textContent = content.kicker;
+  tabPanelTitle.textContent = content.title;
+  tabPanelBody.textContent = nextTab === "serious" ? revealMessage : content.body;
+  tabPanel.classList.remove("panel-animate");
+  void tabPanel.offsetWidth;
+  tabPanel.classList.add("panel-animate");
+
+  for (let i = 0; i < 6; i += 1) {
+    window.setTimeout(spawnParticle, i * 70);
   }
 }
 
-startButton.addEventListener("click", startStory);
-showMessageButton.addEventListener("click", showFinalMessage);
+function handleTabInteraction(event) {
+  const rawTarget = event.target;
+  const target =
+    rawTarget instanceof Element ? rawTarget : rawTarget && rawTarget.parentElement;
+  const button = target ? target.closest("[data-tab]") : null;
+  if (!button) {
+    return;
+  }
+
+  switchTab(button.dataset.tab);
+}
+
+tabButtons.forEach((button) => {
+  button.addEventListener("click", () => switchTab(button.dataset.tab));
+});
+
+if (tabSwitcher) {
+  tabSwitcher.addEventListener("click", handleTabInteraction);
+}
 
 startParticles();
 playTypewriterSequence();

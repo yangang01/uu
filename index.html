@@ -27,7 +27,7 @@
           <span class="brand-mark">Hello Kitty apology letter</span>
           <h1>给你的一封发光道歉信</h1>
           <p class="headline-note">昨天让你失落了，我不想轻轻带过，所以想认真把安慰和在乎都放在这里。</p>
-          <p class="music-inline">BGM · Back To December</p>
+          <p class="music-inline">BGM · Perfect</p>
         </div>
       </header>
 
@@ -42,13 +42,22 @@
 
             <div id="typewriter-lines" class="typewriter-lines" aria-live="polite"></div>
 
-            <div class="button-row">
-              <button type="button" id="start-story" class="pill primary">点一下，让我好好哄你</button>
-              <button type="button" id="show-message" class="pill ghost">收下我这句心里话</button>
+            <div class="tab-switcher" role="tablist" aria-label="道歉内容切换">
+              <button type="button" class="tab-pill" data-tab="comfort" aria-selected="false">想哄你</button>
+              <button type="button" class="tab-pill" data-tab="serious" aria-selected="false">想认真说</button>
             </div>
 
-            <div id="final-message" class="final-message">
-              <p>我不想只说对不起，我更想让你以后在我这里，被好好在乎。</p>
+            <div class="tab-panel glass-soft" id="tab-panel">
+              <p class="tab-placeholder" id="tab-placeholder">点一个我想对你说的话。</p>
+              <div class="tab-panel-content" id="tab-panel-content" hidden>
+                <span class="tab-panel-kicker" id="tab-panel-kicker"></span>
+                <h3 id="tab-panel-title"></h3>
+                <p id="tab-panel-body"></p>
+              </div>
+            </div>
+
+            <div class="closing-note">
+              <p>你对我来说不是随便的人，所以你的失落，我也不想随便带过。</p>
             </div>
           </div>
 
